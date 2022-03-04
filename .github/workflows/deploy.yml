@@ -12,10 +12,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Set environment
+      - name: Set environment and email
         run: |
           cp template.env .env
           sed -i 's/example.com/${{ secrets.TRAEFIK_HOSTNAME }}/g' .env
+          sed -i 's/email@example.com/${{ secrets.CERTIFICATE_EMAIL }}/g' traefik.yml
       - name: Create acme.json
         run: |
           touch acme.json
